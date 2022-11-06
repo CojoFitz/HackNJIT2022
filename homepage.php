@@ -2,11 +2,10 @@
   session_start();
 ?>
 
+<!DOCTYPE html>
 <html>
 <head>
-  <title>
-    homepage
-  </title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://fonts.cdnfonts.com/css/kiona-2" rel="stylesheet">
 <style>
 body {
@@ -50,10 +49,10 @@ body {
 }
 
 .dropdown-content {
-  right: 0;
   display: none;
   position: absolute;
-  margin-top: 5.35%;
+  margin-top: 5.2%;
+  margin-left: 1.2%;
   background-color: #f9f9f9;
   min-width: 160px;
   z-index: 1;
@@ -94,13 +93,6 @@ table{
   width: 20%;
   height: 25%;
   transform: translate(-50%, -50%);
-  animation: fadeInAnimation ease 3s;
-  animation-iteration-count: 1;
-  animation-fill-mode: forwards;
-}
-@keyframes fadeInAnimation {
-  0%   {opacity: 0;}
-  100% {opacity: 1;}
 }
 td{
   text-align: center;
@@ -126,16 +118,16 @@ input {
 </head>
 <body>
 
-<div class="topnav">
+<div class="topnav" id="myTopnav">
   <a class="active" href="homepage.html"> <img src="https://cdn.discordapp.com/attachments/1038445976702156880/1038493812038844416/Campr.png" height="77px" alt="Campr Logo"> </a>
   <div class="dropdown">
     <button id="topbutton" class="dropbtn">My Profile</button>
     <div class="dropdown-content">
-      <a href="#">Settings</a>
+      <a href="#">Interests</a>
       <a href="logout.php">Logout</a>
     </div>
   </div>
-  <a id="topbutton" href="group.html">My Groups</a>
+  <a id="topbutton" href="group.php">My Groups</a>
   <a id="topbutton" href="news.html">Forum</a>
   <a id="topbutton" href="about.html">About Us</a>
 </div>
@@ -143,15 +135,16 @@ input {
 <div style="padding-left:50%; padding-top: 10%;">
   <table>
     <tr>
-      <td>Welcome
-      <?php
+      <td>Welcome 
+
+        <?php
           echo $_SESSION['firstName'];
-      ?>  
+        ?>
       </td>
     </tr>
     <tr>
       <td>
-        <form action="group.html">
+        <form action="group.php">
           <input type="submit" value="Check your Camps">
         </form>
       </td>

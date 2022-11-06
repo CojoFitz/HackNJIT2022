@@ -24,7 +24,6 @@
             "instance" => "instance5",
             "userID" => $userID,
             "interestStr" => $interestStr
-            //FIX ME, strings not passing to database
         ));
 
         $ch = curl_init();
@@ -36,10 +35,12 @@
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
         $result = curl_exec($ch);
         curl_close($ch);
-
+        echo $results;
+        /*
         echo "<script type=\"text/javascript\">
         window.location.href = 'login.php';
         </script>";
+        */
     }
     $url = "https://afsaccess4.njit.edu/~nm669/hackNJIT2022/backend.php";
 

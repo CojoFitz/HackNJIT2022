@@ -1,10 +1,15 @@
-<!DOCTYPE html>
+<?php
+  session_start();
+?>
+
 <html>
 <head>
-<title>
-  news
-</title>
+  <title>
+    group
+  </title>
 <link href="https://fonts.cdnfonts.com/css/kiona-2" rel="stylesheet">
+<link href="chatroom.css" rel="stylesheet">
+<script type="text/javascript" src="script.js"> </script>
 <style>
 body {
   background-color: #ddd;
@@ -108,6 +113,11 @@ td{
   opacity:100%;
   padding: 10px;
 }
+
+textarea{
+  height: 300px;
+  width: 530px;
+}
 </style>
 </head>
 <body>
@@ -115,25 +125,57 @@ td{
     <div class="topnav">
         <a class="active" href="homepage.php"> <img src="https://cdn.discordapp.com/attachments/1038445976702156880/1038493812038844416/Campr.png" height="77px" alt="Campr Logo"> </a>
         <div class="dropdown">
-          <button id="topbutton" class="dropbtn">My Profile </button>
+          <button id="topbutton" class="dropbtn">My Profile</button>
           <div class="dropdown-content">
-            <a href="#">Link 1</a>
-            <a href="#">Link 2</a>
-            <a href="#">Link 3</a>
+            <a href="#">Settings</a>
+            <a href="logout.php">Logout</a>
           </div>
         </div>
-        <a id="topbutton" href="group.html">My Groups</a>
+        <a id="topbutton" href="group.php">My Groups</a>
         <a id="topbutton" href="news.html">Forum</a>
         <a id="topbutton" href="about.html">About Us</a>
       </div>
 
-<div style="padding-left:50%; padding-top: 10%;">
-  <table>
-    <tr>
-      <td>fake forum</td>
-    </tr>
-  </table>
-</div>
+<?php
+
+  $url = 'https://afsaccess4.njit.edu/~nm669/hackNJIT2022/backend.php';
+
+    $jsonBody = json_encode(array(
+        "instance" => "instance6",
+        "userID" => $_SESSION['userID']
+    ));
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonBody);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept: application/json'));
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+    $result = curl_exec($ch);
+    curl_close($ch);
+
+    $decodedData = json_decode($result, true);
+    $roomID = $decodedData["roomID"];
+    echo "<input type='hidden' id='groupID' value='$roomID'></input>";
+
+  echo '<div id="wrapper">
+  <div id="menu">
+  <p class="welcome">Welcome, <b></b></p>
+  <p class="logout"><a id="exit" href="homepage.php">Exit Chat</a></p>
+  </div>';
+  echo '<div id="chatbox"><textarea id="message2" name="message2"> </textarea></div>
+      <input name="message" type="text" id="message" />
+      <input name="button1" type="button" id="button1" value="Send" onclick="main()"/>
+  </div>';
+
+
+?>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+  // jQuery Document
+  $(document).ready(function () {});
+</script>
 
 </body>
 </html>

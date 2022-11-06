@@ -33,6 +33,7 @@
         echo "<script type=\"text/javascript\">
         window.location.href = 'homepage.php';
         </script>";
+
     }
     else{
         echo '<p class="sign" align="center">Invalid Username or Password</p>';
@@ -63,11 +64,9 @@
 ?>
 
 <head>
-    <!--
   <link rel="stylesheet" href="css/style.css">
   <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet" href="logincss.css">
--->
 <title>Login</title>
 </head>
