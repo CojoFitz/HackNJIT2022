@@ -1,5 +1,5 @@
 <?php
-
+    session_start();
     if (isset($_POST['submit']))
     {
         ob_start();
@@ -27,12 +27,41 @@
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
         $result = curl_exec($ch);
         curl_close($ch);
-        echo $result;
+        //echo $result;
+
+        $jsonBody = json_encode(array(
+            "instance" => "instance1",
+            "username" => $username,
+            "password" => $password
+        ));
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonBody);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept: application/json'));
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        $result = curl_exec($ch);
+        curl_close($ch);
+        //echo $result;
+
+        $decoded = json_decode($result, true);
+        //var_dump($decoded);
+        $_SESSION['userID'] = $decoded['userID'];
+        $_SESSION['firstName'] = $decoded['firstName'];
+
+        echo $_SESSION['userID'];
+        echo $_SESSION['firstName'];
+
+        echo "<script type=\"text/javascript\">
+        window.location.href = 'interest.php';
+        </script>";
     }
 
     echo '<div class="main">';
     echo '<p class="sign" align="center">Sign Up</p>';
-    echo "<form class='form1' action=\"\" method=\"post\" onsubmit=\"alert('Account successfully created. Please try logging in.');\">";
+    echo "<form class='form1' action=\"\" method=\"post\">";
     echo "<input class='un ' type='text' align='center' name=\"fn\" type=\"text\" placeholder='First Name'/>";
     echo "<input class='un ' type='text' align='center' name=\"ln\" type=\"text\" placeholder='Last Name'/>";
     echo "<input class='un ' type='text' align='center' name=\"username\" type=\"text\" placeholder='Username'/>";

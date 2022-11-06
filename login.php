@@ -24,8 +24,15 @@
     curl_close($ch);
 
     $decodedData = json_decode($result, true);
-    if ($decodedData["username"] == $username) && ($decodedData["password"] == $password){
-        //add redirect here to homepage
+    var_dump($decodedData);
+    if (($decodedData["username"] == $username) && ($decodedData["password"] == $password)){
+        $_SESSION['firstName'] = $decodedData["firstName"];
+        $_SESSION['userID'] = $decodedData["userID"];
+        echo $_SESSION['firstName'];
+        echo $_SESSION['userID'];
+        echo "<script type=\"text/javascript\">
+        window.location.href = 'homepage.php';
+        </script>";
     }
     else{
         echo '<p class="sign" align="center">Invalid Username or Password</p>';
@@ -52,14 +59,15 @@
     echo "<input class='submit' name=\"submit\" type=\"submit\" align='center'/>";
     echo "</form>";
     echo "</div>";
-
   }
 ?>
 
 <head>
+    <!--
   <link rel="stylesheet" href="css/style.css">
   <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="logincss.css">
-  <title>Login</title>
+<link rel="stylesheet" href="logincss.css">
+-->
+<title>Login</title>
 </head>
